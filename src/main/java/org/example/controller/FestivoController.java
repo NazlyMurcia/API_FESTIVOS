@@ -2,13 +2,11 @@ package org.example.controller;
 
 import org.example.entity.Festivo;
 import org.example.repository.FestivoRepository;
+import org.example.service.FestivoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -16,11 +14,16 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/festivos")
 public class FestivoController {
 
     @Autowired
     private FestivoRepository festivoRepository;
+
+
+    @Autowired
+    private FestivoService festivoService;
 
     @GetMapping("/verificar/{year}/{month}/{day}")
     public ResponseEntity<String> verificarFecha(
@@ -32,18 +35,21 @@ public class FestivoController {
             String fechaStr = year + "-" + month + "-" + day;
             LocalDate fecha = LocalDate.parse(fechaStr, DateTimeFormatter.ofPattern("yyyy-M-d"));
 
-            // Buscar festivos en la base de datos
-            List<Festivo> festivos = festivoRepository.findByDiaAndMes(fecha.getDayOfMonth(), fecha.getMonthValue());
+            // Llamar al servicio para verificar si es festivo
+            String resultado = festivoService.verificarFechaFestiva(fecha);
 
-            // Verificar si hay algún resultado
-            if (!festivos.isEmpty()) {
-                return ResponseEntity.ok("Es Festivo: " + festivos.get(0).getNombre());
-            } else {
-                return ResponseEntity.ok("No es Festivo");
-            }
+            return ResponseEntity.ok(resultado);
+
         } catch (DateTimeParseException e) {
-            // Manejar fechas no válidas
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Fecha no válida");
         }
     }
+
+
+    @GetMapping("/listar/{year}")
+    public ResponseEntity<List<Festivo>> listarFestivosPorAño(@PathVariable int year) {
+        List<Festivo> festivos = festivoService.obtenerFestivosPorAño(year);
+        return ResponseEntity.ok(festivos);
+    }
+
 }

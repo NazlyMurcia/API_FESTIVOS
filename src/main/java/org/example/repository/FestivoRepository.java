@@ -8,4 +8,5 @@ import java.util.List;
 public interface FestivoRepository extends JpaRepository<Festivo, Long> {
 
     List<Festivo> findByDiaAndMes(int dia, int mes);
+
 }
