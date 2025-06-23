@@ -1,9 +1,10 @@
-package org.example.entity;
+package org.validador_festivos.entity;
 
-
-import jakarta.persistence.*;
-
-import java.time.LocalDate;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "festivo")
@@ -15,8 +16,8 @@ public class Festivo {
     private String nombre;
     private int dia;
     private int mes;
-    private int diasPascua;
-    private int idTipo;
+    private int diaspascua;
+    private int idtipo;
 
 
     // Constructor por defecto (necesario para Hibernate)
@@ -24,12 +25,12 @@ public class Festivo {
     }
 
     // Constructor personalizado
-    public Festivo(String nombre, int dia, int mes, int diasPascua, int idTipo) {
+    public Festivo(String nombre, int dia, int mes, int diaspascua, int idtipo) {
         this.nombre = nombre;
         this.dia = dia;
         this.mes = mes;
-        this.diasPascua = diasPascua;
-        this.idTipo = idTipo;
+        this.diaspascua = diaspascua;
+        this.idtipo = idtipo;
     }
 
 
@@ -41,12 +42,12 @@ public class Festivo {
         this.mes = mes;
     }
 
-    public void setDiasPascua(int diasPascua) {
-        this.diasPascua = diasPascua;
+    public void setDiaspascua(int diaspascua) {
+        this.diaspascua = diaspascua;
     }
 
-    public void setIdTipo(int idTipo) {
-        this.idTipo = idTipo;
+    public void setIdtipo(int idtipo) {
+        this.idtipo = idtipo;
     }
 
     public String getNombre() {
@@ -61,12 +62,12 @@ public class Festivo {
         return mes;
     }
 
-    public int getDiasPascua() {
-        return diasPascua;
+    public int getDiaspascua() {
+        return diaspascua;
     }
 
-    public int getIdTipo() {
-        return idTipo;
+    public int getIdtipo() {
+        return idtipo;
     }
 
 

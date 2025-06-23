@@ -1,9 +1,9 @@
-package org.example.repository;
-
-import org.example.entity.Festivo;
-import org.springframework.data.jpa.repository.JpaRepository;
+package org.validador_festivos.repository;
 
 import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.validador_festivos.entity.Festivo;
 
 public interface FestivoRepository extends JpaRepository<Festivo, Long> {
 

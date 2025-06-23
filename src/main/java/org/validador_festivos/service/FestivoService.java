@@ -1,14 +1,14 @@
-package org.example.service;
-
-import org.example.entity.Festivo;
-import org.example.repository.FestivoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+package org.validador_festivos.service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.validador_festivos.entity.Festivo;
+import org.validador_festivos.repository.FestivoRepository;
 
 @Service
 public class FestivoService {

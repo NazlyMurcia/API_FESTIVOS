@@ -1,30 +1,32 @@
-package org.example.controller;
-
-import org.example.entity.Festivo;
-import org.example.repository.FestivoRepository;
-import org.example.service.FestivoService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+package org.validador_festivos.controller;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.validador_festivos.entity.Festivo;
+import org.validador_festivos.repository.FestivoRepository;
+import org.validador_festivos.service.FestivoService;
+
+
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/festivos")
 public class FestivoController {
 
     @Autowired
     private FestivoRepository festivoRepository;
-
-
+    
     @Autowired
     private FestivoService festivoService;
-
+    
     @GetMapping("/verificar/{year}/{month}/{day}")
     public ResponseEntity<String> verificarFecha(
             @PathVariable String year,
